@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.MainFragment">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/logo"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivLogo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/welcome_to_book_app"
+        android:textStyle="bold"
+        android:textSize="28sp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnRegister"
+        app:cornerRadius="5dp"
+        android:backgroundTint="@color/black"
+        android:text="@string/login"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/continue_without_login"
+        android:textColor="@color/black"
+        app:cornerRadius="5dp"/>
+
+</RelativeLayout>
