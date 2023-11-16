@@ -181,7 +181,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
                 else -> {
                     viewModel.logout()
-                    val action = HomeFragmentDirections.actionGlobalLogin()
+                    val action = HomeFragmentDirections.actionGlobalMain()
                     navController.navigate(action)
                     true
                 }

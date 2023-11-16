@@ -52,6 +52,7 @@ class CategoryAdapter(
 
                 ibDeleteCategory.setOnClickListener {
                     listener?.onDelete(category)
+                    ibDeleteCategory.visibility = View.GONE
                 }
             }
         }

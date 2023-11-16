@@ -42,7 +42,7 @@
         app:strokeColor="@color/black"
         app:strokeWidth="1dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/continue_without_login"
+        android:text="@string/continue_with_sign_up"
         android:textColor="@color/black"
         app:cornerRadius="5dp"/>
 

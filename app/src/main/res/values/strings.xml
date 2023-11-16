@@ -50,7 +50,6 @@
     <string name="created_at">Created At</string>
     <string name="create_new_account">Create New Account</string>
     <string name="welcome_to_book_app">Welcome to Book App</string>
-    <string name="continue_without_login">Continue without Login</string>
     <string name="logout">Logout</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -64,4 +63,5 @@
     <string name="reset_password">Reset Password</string>
     <string name="send">Send</string>
     <string name="use_password_to_login">Use Password to Login</string>
+    <string name="continue_with_sign_up">Continue with Sign Up</string>
 </resources>

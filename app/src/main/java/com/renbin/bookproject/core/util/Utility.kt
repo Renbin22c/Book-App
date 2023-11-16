@@ -33,17 +33,21 @@ object Utility {
                         fileSize >= 1024 -> "%.2f KB".format(fileSize / 1024)
                         else -> "%.2f bytes".format(fileSize)
                     }
-                    sizeView.text = sizeText
-                    pageView.text = pdfView.pageCount.toString()
-                    pdfView.fromBytes(it)
-                        .enableSwipe(false)
-                        .onError {  e ->
-                            throw e
-                        }
-                        .onLoad {
-                            pageView.text = "${pdfView.pageCount} page"
-                        }
-                        .load()
+                    try {
+                        sizeView.text = sizeText
+                        pageView.text = pdfView.pageCount.toString()
+                        pdfView.fromBytes(it)
+                            .enableSwipe(false)
+                            .onError {  e ->
+                                throw e
+                            }
+                            .onLoad {
+                                pageView.text = "${pdfView.pageCount} page"
+                            }
+                            .load()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
         }
     }

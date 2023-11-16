@@ -41,11 +41,13 @@ class HomeViewModel @Inject constructor(
     private fun getAllCategories() {
         viewModelScope.launch(Dispatchers.IO) {
             user?.let { currentUser ->
+
                 safeApiCall {
                     categoryRepo.getAllCategories(currentUser.uid)
                 }?.collect{
                     _categories.value = it
                 }
+
             }
         }
     }

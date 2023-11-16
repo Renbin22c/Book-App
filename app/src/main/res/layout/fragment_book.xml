@@ -24,14 +24,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/books"
+            android:text="@string/category"
             android:textStyle="bold"
             android:layout_centerHorizontal="true" />
 
         <TextView
+            android:id="@+id/tvCategoryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category"
+            android:text="@string/category_name"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/tvTitle"/>
     </RelativeLayout>

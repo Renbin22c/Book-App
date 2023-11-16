@@ -45,6 +45,8 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
             ibBack.setOnClickListener {
                 navController.popBackStack()
             }
+
+            tvCategoryName.text = args.categoryName
         }
     }
 
