@@ -1,12 +1,16 @@
-package com.renbin.bookproject
+package com.renbin.bookproject.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.renbin.bookproject.R
 import com.renbin.bookproject.core.util.NetworkManager
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -23,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         val networkManager = NetworkManager(this)
         networkManager.observe(this){
-            Log.d("debugging", it.toString())
             if(!it){
                 if (!dialog.isShowing) dialog.show()
             } else{
@@ -31,6 +34,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
