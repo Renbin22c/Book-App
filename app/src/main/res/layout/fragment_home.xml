@@ -90,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty"
+        android:textAlignment="center"
         android:visibility="gone"
         android:layout_centerInParent="true"
         android:textSize="24sp"/>
@@ -100,6 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="5dp"
         android:paddingHorizontal="5dp">
 
         <com.google.android.material.button.MaterialButton

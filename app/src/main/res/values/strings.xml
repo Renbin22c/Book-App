@@ -27,7 +27,7 @@
     <string name="back">Back</string>
     <string name="n_a">N/A</string>
     <string name="date">Date</string>
-    <string name="the_description_of_the_book">The description of the book</string>
+    <string name="the_description_of_the_book">The description of the book:</string>
     <string name="read_book">Read Book</string>
     <string name="page">Page</string>
     <string name="more">More</string>
@@ -64,4 +64,5 @@
     <string name="send">Send</string>
     <string name="use_password_to_login">Use Password to Login</string>
     <string name="continue_with_sign_up">Continue with Sign Up</string>
+    <string name="description">Description</string>
 </resources>

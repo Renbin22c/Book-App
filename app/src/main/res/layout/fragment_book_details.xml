@@ -49,138 +49,154 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true">
                 <RelativeLayout
-                    android:id="@+id/rlPdf"
-                    android:layout_width="100dp"
-                    android:layout_height="140dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@color/gray">
-
-                    <com.github.barteksc.pdfviewer.PDFView
-                        android:id="@+id/pdfView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp" />
-
-                </RelativeLayout>
-                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@id/rlPdf">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient_background2"
+                    android:padding="10dp">
+                    <RelativeLayout
+                        android:id="@+id/rlPdf"
+                        android:layout_width="100dp"
+                        android:layout_height="140dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/gray">
 
-                    <TextView
-                        android:id="@+id/tvBookTitle"
-                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        <com.github.barteksc.pdfviewer.PDFView
+                            android:id="@+id/pdfView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"/>
+
+                    </RelativeLayout>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/book_title"/>
+                        android:orientation="vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@id/rlPdf">
 
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tvBookTitle"
+                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/book_title"/>
 
-                        <TableRow
-                            android:layout_marginTop="8dp">
-                            <TextView
-                                android:id="@+id/tvCategoryLabel"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:text="@string/category"/>
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                            <TextView
-                                android:id="@+id/tvCategory"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/n_a"/>
-                        </TableRow>
+                            <TableRow
+                                android:layout_marginTop="8dp">
+                                <TextView
+                                    android:id="@+id/tvCategoryLabel"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="@string/category"/>
 
-                        <TableRow
-                            android:layout_marginTop="8dp">
-                            <TextView
-                                android:id="@+id/tvDateLabel"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:text="@string/date"/>
+                                <TextView
+                                    android:id="@+id/tvCategory"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:text="@string/n_a"/>
+                            </TableRow>
 
-                            <TextView
-                                android:id="@+id/tvDate"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/n_a"/>
-                        </TableRow>
+                            <TableRow
+                                android:layout_marginTop="8dp">
+                                <TextView
+                                    android:id="@+id/tvDateLabel"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="@string/date"/>
 
-                        <TableRow
-                            android:layout_marginTop="8dp">
-                            <TextView
-                                android:id="@+id/tvSizeLabel"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:text="@string/size"/>
+                                <TextView
+                                    android:id="@+id/tvDate"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:text="@string/n_a"/>
+                            </TableRow>
 
-                            <TextView
-                                android:id="@+id/tvSize"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/n_a"/>
-                        </TableRow>
+                            <TableRow
+                                android:layout_marginTop="8dp">
+                                <TextView
+                                    android:id="@+id/tvSizeLabel"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="@string/size"/>
 
-                        <TableRow
-                            android:layout_marginTop="8dp">
-                            <TextView
-                                android:id="@+id/tvPageLabel"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
-                                android:text="@string/page"/>
+                                <TextView
+                                    android:id="@+id/tvSize"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:text="@string/n_a"/>
+                            </TableRow>
 
-                            <TextView
-                                android:id="@+id/tvPage"
-                                style="@style/TextAppearance.MaterialComponents.Caption"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/n_a"/>
-                        </TableRow>
-                    </TableLayout>
-                </LinearLayout>
-            </RelativeLayout>
+                            <TableRow
+                                android:layout_marginTop="8dp">
+                                <TextView
+                                    android:id="@+id/tvPageLabel"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="@string/page"/>
+
+                                <TextView
+                                    android:id="@+id/tvPage"
+                                    style="@style/TextAppearance.MaterialComponents.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="5dp"
+                                    android:text="@string/n_a"/>
+                            </TableRow>
+                        </TableLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:padding="10dp"
+                android:text="@string/the_description_of_the_book"
+                style="@style/TextAppearance.AppCompat.Title"/>
 
             <TextView
                 android:id="@+id/tvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:padding="5dp"
-                android:text="@string/the_description_of_the_book"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:layout_marginStart="5dp"
+                android:paddingHorizontal="10dp"
+                android:text="@string/description"
+                style="@style/TextAppearance.Material3.BodyLarge"/>
         </LinearLayout>
     </ScrollView>
 

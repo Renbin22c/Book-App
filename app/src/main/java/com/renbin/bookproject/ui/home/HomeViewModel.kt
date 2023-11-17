@@ -1,5 +1,6 @@
 package com.renbin.bookproject.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +12,9 @@ import com.renbin.bookproject.data.repo.CategoryRepo
 import com.renbin.bookproject.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,6 +34,9 @@ class HomeViewModel @Inject constructor(
     private val _folderState: MutableLiveData<Boolean> = MutableLiveData(true)
     val folderState: LiveData<Boolean> = _folderState
 
+    private val _loading: MutableSharedFlow<Boolean>  = MutableSharedFlow()
+    val loading: SharedFlow<Boolean> = _loading
+
     private val user = authService.getCurrentUser()
 
     init {
@@ -40,15 +46,15 @@ class HomeViewModel @Inject constructor(
 
     private fun getAllCategories() {
         viewModelScope.launch(Dispatchers.IO) {
+            _loading.emit(true)
             user?.let { currentUser ->
-
                 safeApiCall {
                     categoryRepo.getAllCategories(currentUser.uid)
                 }?.collect{
                     _categories.value = it
                 }
-
             }
+            _loading.emit(false)
         }
     }
 
