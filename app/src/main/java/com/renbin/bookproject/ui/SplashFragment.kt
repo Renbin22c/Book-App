@@ -40,7 +40,7 @@ class SplashFragment : Fragment() {
                 val action = SplashFragmentDirections.actionSplashToHome()
                 navController.navigate(action)
             } else{
-                val action = SplashFragmentDirections.actionGlobalMain()
+                val action = SplashFragmentDirections.actionSplashToMain()
                 navController.navigate(action)
             }
         }, 2000)

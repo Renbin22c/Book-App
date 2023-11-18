@@ -15,6 +15,11 @@
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_splash_to_main"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/mainFragment"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -23,13 +28,30 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_to_addPdf"
-            app:destination="@id/addPdfFragment" />
+            app:destination="@id/addPdfFragment"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/slide_to_top"
+            app:popEnterAnim="@anim/slide_from_top"
+            app:popExitAnim="@anim/slide_to_bottom"/>
         <action
             android:id="@+id/action_home_to_book"
-            app:destination="@id/bookFragment" />
+            app:destination="@id/bookFragment"
+            app:enterAnim="@anim/zoom_in"
+            app:exitAnim="@anim/zoom_out"
+            app:popEnterAnim="@anim/zoom_in"
+            app:popExitAnim="@anim/zoom_out"/>
         <action
             android:id="@+id/action_home_to_profile"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right"/>
+        <action
+            android:id="@+id/action_home_to_main"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/mainFragment"/>
     </fragment>
     <fragment
         android:id="@+id/addPdfFragment"
@@ -65,7 +87,11 @@
             app:argType="string"/>
         <action
             android:id="@+id/action_bookDetails_to_pdfDetails"
-            app:destination="@id/pdfDetailsFragment" />
+            app:destination="@id/pdfDetailsFragment"
+            app:enterAnim="@anim/slide_from_bottom"
+            app:exitAnim="@anim/slide_to_top"
+            app:popEnterAnim="@anim/slide_from_top"
+            app:popExitAnim="@anim/slide_to_bottom"/>
     </fragment>
     <fragment
         android:id="@+id/pdfDetailsFragment"
@@ -79,11 +105,20 @@
 
     <action
         android:id="@+id/action_global_editPdf"
-        app:destination="@id/editPdfFragment" />
+        app:destination="@id/editPdfFragment"
+        app:enterAnim="@anim/slide_from_bottom"
+        app:exitAnim="@anim/slide_to_top"
+        app:popEnterAnim="@anim/slide_from_top"
+        app:popExitAnim="@anim/slide_to_bottom"/>
 
     <action
         android:id="@+id/action_global_bookDetails"
-        app:destination="@id/bookDetailsFragment" />
+        app:destination="@id/bookDetailsFragment"
+        app:enterAnim="@anim/slide_from_right"
+        app:exitAnim="@anim/slide_to_left"
+        app:popEnterAnim="@anim/slide_from_left"
+        app:popExitAnim="@anim/slide_to_right"/>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.renbin.bookproject.ui.profile.ProfileFragment"
@@ -112,11 +147,16 @@
         tools:layout="@layout/fragment_register" />
     <action
         android:id="@+id/action_global_login"
-        app:destination="@id/loginFragment" />
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/slide_from_right"
+        app:exitAnim="@anim/slide_to_left"
+        app:popEnterAnim="@anim/slide_from_left"
+        app:popExitAnim="@anim/slide_to_right"/>
     <action
         android:id="@+id/action_global_register"
-        app:destination="@id/registerFragment" />
-    <action
-        android:id="@+id/action_global_main"
-        app:destination="@id/mainFragment" />
+        app:destination="@id/registerFragment"
+        app:enterAnim="@anim/slide_from_left"
+        app:exitAnim="@anim/slide_to_right"
+        app:popEnterAnim="@anim/slide_from_right"
+        app:popExitAnim="@anim/slide_to_left"/>
 </navigation>

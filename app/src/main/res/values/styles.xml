@@ -13,4 +13,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
+
+    <style name="Theme.Shorts" parent="android:Theme.Material">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
 </resources>

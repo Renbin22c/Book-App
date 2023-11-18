@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#706A6A</color>
     <color name="error">#F30000</color>
+    <color name="transparent">#00000000</color>
 </resources>

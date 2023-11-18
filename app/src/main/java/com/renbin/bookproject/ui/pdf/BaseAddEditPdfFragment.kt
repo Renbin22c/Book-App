@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import android.view.animation.AnimationUtils
+import com.renbin.bookproject.R
 import com.renbin.bookproject.databinding.FragmentBaseAddEditPdfBinding
 import com.renbin.bookproject.ui.base.BaseFragment
 import com.renbin.bookproject.ui.pdf.viewModel.BaseAddEditPdfViewModel
