@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.renbin.bookproject.R
 import com.renbin.bookproject.databinding.FragmentAddCategoryPopUpBinding
 import com.renbin.bookproject.core.util.Utility.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,7 @@ class AddCategoryPopUpFragment : DialogFragment() {
         category = binding.etTodo.text.toString().trim()
 
         if(TextUtils.isEmpty(category)){
-            showToast(requireContext(), "Please enter category !!!")
+            showToast(requireContext(), "Please enter category !!!", R.drawable.ic_pdf)
         } else{
             viewModel.submit(category)
             dismiss()

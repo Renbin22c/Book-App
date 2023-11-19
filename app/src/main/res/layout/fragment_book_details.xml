@@ -90,10 +90,11 @@
 
                         <TextView
                             android:id="@+id/tvBookTitle"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/book_title"/>
+                            android:text="@string/book_title"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
 
                         <TableLayout
                             android:layout_width="match_parent"
@@ -112,9 +113,10 @@
                                 <TextView
                                     android:id="@+id/tvCategory"
                                     style="@style/TextAppearance.MaterialComponents.Caption"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="5dp"
+                                    android:layout_weight="1"
+                                    android:layout_marginEnd="20dp"
                                     android:text="@string/n_a"/>
                             </TableRow>
 

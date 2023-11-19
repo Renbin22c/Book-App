@@ -123,7 +123,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 }
             }
         }
-
     }
 
     private fun setupAdapter(){

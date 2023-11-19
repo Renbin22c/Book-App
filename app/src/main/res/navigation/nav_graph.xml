@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.renbin.bookproject.ui.SplashFragment"
+        android:name="com.renbin.bookproject.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -126,7 +126,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.renbin.bookproject.ui.MainFragment"
+        android:name="com.renbin.bookproject.ui.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
     <fragment

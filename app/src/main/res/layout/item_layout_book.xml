@@ -59,22 +59,22 @@
             android:maxLines="3"/>
 
         <TextView
-            android:id="@+id/tvPage"
+            android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Caption"
-            android:text="@string/page"
+            android:text="@string/category"
             android:textAlignment="textStart"
             android:layout_marginBottom="2dp"
             android:layout_toEndOf="@id/rlPdf"
             android:layout_above="@id/tvSize"/>
 
         <TextView
-            android:id="@+id/tvCategory"
+            android:id="@+id/tvPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Caption"
-            android:text="@string/category"
+            android:text="@string/page"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:maxLines="1"/>
@@ -97,7 +97,7 @@
             android:text="@string/time"
             android:textAlignment="center"
             android:layout_toEndOf="@id/tvSize"
-            android:layout_toStartOf="@id/tvCategory"
+            android:layout_toStartOf="@id/tvPage"
             android:layout_alignParentBottom="true"
             android:maxLines="1"/>
 

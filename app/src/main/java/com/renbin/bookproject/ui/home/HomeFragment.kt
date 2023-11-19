@@ -5,12 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.renbin.bookproject.R
 import com.renbin.bookproject.data.model.Book
 import com.renbin.bookproject.data.model.Category
@@ -57,7 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     val action = HomeFragmentDirections.actionHomeToAddPdf()
                     navController.navigate(action)
                 } else {
-                    showToast(requireContext(),"Please add a category first")
+                    showToast(requireContext(),"Please add a category first", R.drawable.ic_pdf)
                 }
             }
 
@@ -192,9 +195,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     true
                 }
                 else -> {
-                    viewModel.logout()
-                    val action = HomeFragmentDirections.actionHomeToMain()
-                    navController.navigate(action)
+                    alertLogout()
                     true
                 }
             }
@@ -246,5 +247,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 return true
             }
         })
+    }
+
+    private fun alertLogout(){
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog, null)
+        val alertDialog = MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_Rounded)
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        val btnCancel = dialogView.findViewById<Button>(R.id.btnCancel)
+        val btnConfirm = dialogView.findViewById<Button>(R.id.btnConfirm)
+
+        btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        btnConfirm.setOnClickListener {
+            viewModel.logout()
+            val action = HomeFragmentDirections.actionHomeToMain()
+            navController.navigate(action)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 }

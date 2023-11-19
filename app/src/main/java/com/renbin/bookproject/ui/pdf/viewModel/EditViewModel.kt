@@ -34,20 +34,13 @@ class EditPdfViewModel@Inject constructor(
     }
 
     fun submit(title: String, desc: String, category: String) {
-//        val error = validate(title, desc, category)
-//        if(!error.isNullOrEmpty()){
-//            viewModelScope.launch {
-//                _error.emit(error.toString())
-//            }
-//        } else {
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {
                 bookRepo.update(
                     book.value.id,
                     book.value.copy(title = title, desc = desc, category = category))
             }
-            _success.emit("Update Book Successfully !")
+            _success.emit("Update Book Successfully !!!")
         }
      }
-//    }
 }

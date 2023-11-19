@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import com.renbin.bookproject.R
 import com.renbin.bookproject.ui.pdf.viewModel.AddPdfViewModel
 import com.renbin.bookproject.core.util.Utility.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +34,7 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
                     Log.d("PDF Upload", "Selected PDF URI: $pdfUri")
                 }
             } else {
-                showToast(requireContext(), "Cancelled picking pdf")
+                showToast(requireContext(), "Cancelled picking pdf", R.drawable.ic_pdf)
             }
         }
 
@@ -84,18 +85,18 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
                     val uploadUrl = downloadUrl.toString()
                     progressDialog.dismiss()
                     saveBookToFirebase(filePathAndName, uploadUrl)
-                    showToast(requireContext(), "PDF uploaded successfully")
+                    showToast(requireContext(), "PDF uploaded successfully", R.drawable.ic_pdf)
                 }.addOnFailureListener { _ ->
                     progressDialog.dismiss()
-                    showToast(requireContext(), "Failed to get download URL")
+                    showToast(requireContext(), "Failed to get download URL", R.drawable.ic_pdf)
                 }
             }.addOnFailureListener { _ ->
                 progressDialog.dismiss()
-                showToast(requireContext(), "PDF upload failed")
+                showToast(requireContext(), "PDF upload failed", R.drawable.ic_pdf)
 
                 // Handle the upload failure
             }
-        } ?: showToast(requireContext(), "PDF file is null")
+        } ?: showToast(requireContext(), "PDF file is null", R.drawable.ic_pdf)
     }
 
 

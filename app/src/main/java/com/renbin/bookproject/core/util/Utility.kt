@@ -2,20 +2,37 @@ package com.renbin.bookproject.core.util
 
 import android.content.Context
 import android.text.format.DateFormat
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.storage.FirebaseStorage
+import com.renbin.bookproject.R
 import com.renbin.bookproject.data.model.Book
 import java.util.Calendar
 import java.util.Locale
 
 object Utility {
-    fun showToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    fun showToast(context: Context, message: String, iconResourceId: Int) {
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layout = inflater.inflate(R.layout.custom_toast, null)
+
+        val text = layout.findViewById<TextView>(R.id.tvToast)
+        text.text = message
+
+        val icon = layout.findViewById<ImageView>(R.id.ivIcon)
+        icon.setImageResource(iconResourceId)
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_LONG
+        toast.view = layout
+
+        toast.show()
     }
+
 
     fun loadPdf(book: Book, pdfView: PDFView, sizeView: TextView, progressBar: ProgressBar, pageView: TextView) {
         pdfView.recycle()
@@ -52,11 +69,9 @@ object Utility {
         }
     }
 
-
     fun formatTimestamp(timestamp: Long): String {
         val cal = Calendar.getInstance(Locale.ENGLISH)
         cal.timeInMillis = timestamp
         return DateFormat.format("dd/MM/yyyy", cal).toString()
     }
-
 }

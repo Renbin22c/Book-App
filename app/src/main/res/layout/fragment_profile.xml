@@ -217,7 +217,7 @@
             android:layout_centerInParent="true"
             android:text="@string/your_favourite_book_are_empty"
             android:textAlignment="center"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
     </RelativeLayout>
 
 </RelativeLayout>

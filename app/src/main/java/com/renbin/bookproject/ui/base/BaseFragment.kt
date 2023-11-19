@@ -52,6 +52,18 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
                     R.color.error
                 )
             )
+        } else {
+            snackbar.setBackgroundTint(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.gray2
+                )
+            ).setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.black
+                )
+            )
         }
         snackbar.show()
     }

@@ -20,7 +20,7 @@ class LoginViewModel @Inject constructor(
             if (user == null) {
                 _error.emit("Email or Password is wrong")
             } else {
-                _success.emit("Login successful")
+                _success.emit("Login successfully !!!")
             }
         }
     }

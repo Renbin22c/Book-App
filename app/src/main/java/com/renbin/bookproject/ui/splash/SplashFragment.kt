@@ -1,4 +1,4 @@
-package com.renbin.bookproject.ui
+package com.renbin.bookproject.ui.splash
 
 import android.os.Bundle
 import android.os.Handler

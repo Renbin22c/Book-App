@@ -1,4 +1,4 @@
-package com.renbin.bookproject.ui
+package com.renbin.bookproject.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

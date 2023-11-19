@@ -66,4 +66,12 @@
     <string name="continue_with_sign_up">Continue with Sign Up</string>
     <string name="description">Description</string>
     <string name="no_internet_connection">No Internet Connection</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="logout_conformation">Logout Conformation</string>
+    <string name="toast">Toast</string>
+    <string name="toast_icon">Toast Icon</string>
 </resources>

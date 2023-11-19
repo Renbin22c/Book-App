@@ -32,7 +32,7 @@ class RegisterViewModel @Inject constructor(
                         user.uid,
                         User(name = timestamp.toString() , email = user.email ?: "")
                     )
-                    _success.emit("Register successful")
+                    _success.emit("Register successfully !!!")
                 }
             }
         }
