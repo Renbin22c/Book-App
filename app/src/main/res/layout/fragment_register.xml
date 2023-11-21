@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create_new_account"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="30sp"/>
     </LinearLayout>
@@ -43,6 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawableStart="@drawable/ic_email"
+            android:theme="@style/TextViewBlackHandler"
+            android:textColorHighlight="@color/white"
             android:drawablePadding="10dp"
             android:hint="@string/email"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,6 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawableStart="@drawable/ic_lock"
+            android:theme="@style/TextViewBlackHandler"
+            android:textColorHighlight="@color/white"
             android:drawablePadding="10dp"
             android:inputType="textPassword"
             android:hint="@string/password"/>
@@ -79,6 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawableStart="@drawable/ic_lock"
+            android:theme="@style/TextViewBlackHandler"
+            android:textColorHighlight="@color/white"
             android:drawablePadding="10dp"
             android:inputType="textPassword"
             android:hint="@string/confirm_password"/>
@@ -91,6 +98,7 @@
         android:layout_below="@id/tilPassword2"
         android:layout_marginTop="5dp"
         android:text="@string/register"
+        android:textColor="@color/white"
         android:backgroundTint="@color/black"
         app:cornerRadius="5dp"/>
 
@@ -111,7 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="@string/sign_in" />
+            android:text="@string/sign_in"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </RelativeLayout>

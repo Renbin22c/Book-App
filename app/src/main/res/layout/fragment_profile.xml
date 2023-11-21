@@ -25,9 +25,10 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/profile"
             android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:textColor="@color/black"/>
 
         <ImageButton
             android:id="@+id/ibEdit"
@@ -97,7 +98,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
-                            android:text="@string/name"/>
+                            android:text="@string/name"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/tvName"
@@ -107,7 +109,8 @@
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:text="@string/n_a"/>
+                            android:text="@string/n_a"
+                            android:textColor="@color/black"/>
                     </TableRow>
 
                     <TableRow
@@ -118,7 +121,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
-                            android:text="@string/email"/>
+                            android:text="@string/email"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/tvEmail"
@@ -128,7 +132,8 @@
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:text="@string/n_a"/>
+                            android:text="@string/n_a"
+                            android:textColor="@color/black"/>
                     </TableRow>
 
                     <TableRow
@@ -139,7 +144,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
-                            android:text="@string/created_at"/>
+                            android:text="@string/created_at"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/tvCreatedAt"
@@ -149,7 +155,8 @@
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:text="@string/n_a"/>
+                            android:text="@string/n_a"
+                            android:textColor="@color/black"/>
                     </TableRow>
 
                     <TableRow
@@ -160,7 +167,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
-                            android:text="@string/favourite"/>
+                            android:text="@string/favourite"
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:id="@+id/tvFavourite"
@@ -170,7 +178,8 @@
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
                             android:ellipsize="end"
-                            android:text="@string/n_a"/>
+                            android:text="@string/n_a"
+                            android:textColor="@color/black"/>
                     </TableRow>
 
                 </TableLayout>
@@ -183,6 +192,7 @@
                 android:layout_below="@+id/rlProfile"
                 android:visibility="gone"
                 android:drawableStart="@drawable/ic_person"
+                android:theme="@style/TextViewBlackHandler"
                 android:drawableTint="@color/gray"
                 android:drawablePadding="10dp"
                 android:hint="@string/name"
@@ -201,6 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/favourite_books"
+            android:textColor="@color/black"
             style="@style/TextAppearance.AppCompat.Title" />
 
         <androidx.recyclerview.widget.RecyclerView

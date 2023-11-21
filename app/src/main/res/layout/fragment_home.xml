@@ -22,12 +22,13 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="@string/book_app"
-            android:layout_centerInParent="true"/>
+            android:textColor="@color/black"/>
 
         <ImageButton
             android:id="@+id/ibFolder"
