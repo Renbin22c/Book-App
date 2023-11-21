@@ -34,7 +34,10 @@ class ProfileViewModel @Inject constructor(
     private val _books: MutableStateFlow<List<Book>> = MutableStateFlow(emptyList())
     val books: StateFlow<List<Book>> = _books
 
+    val favourites = MutableStateFlow(0)
+
     private val firebaseUser = authService.getCurrentUser()
+
 
     override fun onCreate() {
         super.onCreate()
@@ -85,16 +88,6 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private fun updateUserFavourite(favouriteCount: String){
-        firebaseUser?.let {
-            viewModelScope.launch(Dispatchers.IO) {
-                safeApiCall {
-                    userRepo.updateUser(it.uid, user.value.copy(favourites = favouriteCount))
-                }
-            }
-        }
-    }
-
     fun updateFavourite(favourite: Boolean, id: String){
         viewModelScope.launch(Dispatchers.IO) {
             val book = bookRepo.getBook(id)
@@ -127,9 +120,7 @@ class ProfileViewModel @Inject constructor(
                     bookRepo.getBookByFavourite(it.uid)
                 }?.collect{
                    _books.value = it
-                    val count = it.count().toString()
-                    updateUserFavourite(count)
-                    getCurrentUser()
+                    favourites.emit(it.size)
                     _loading.emit(false)
                 }
             }

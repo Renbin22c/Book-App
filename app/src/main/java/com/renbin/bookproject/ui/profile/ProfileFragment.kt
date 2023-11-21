@@ -24,7 +24,6 @@ import com.renbin.bookproject.ui.adapter.FavouriteBookAdapter
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override val viewModel: ProfileViewModel by viewModels()
-    private var editMode: Boolean = false
     private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var adapter: FavouriteBookAdapter
 
@@ -59,25 +58,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             }
 
             ibEdit.setOnClickListener {
-                if(editMode){
-                    tvTitle.text = getString(R.string.profile)
-                    ibEdit.setImageResource(R.drawable.ic_edit)
-                    ibEditImage.visibility = View.GONE
-                    etName.visibility = View.GONE
+                ibEdit.visibility = View.GONE
+                ibConfirm.visibility = View.VISIBLE
+                ibEditImage.visibility = View.VISIBLE
+                etName.visibility = View.VISIBLE
+                tvTitle.text = getString(R.string.edit_profile)
+            }
 
-                    val name = etName.text.toString()
-                    viewModel.updateName(name)
-                    viewModel.getCurrentUser()
+            ibConfirm.setOnClickListener {
+                ibEdit.visibility = View.VISIBLE
+                ibConfirm.visibility = View.GONE
+                ibEditImage.visibility = View.GONE
+                etName.visibility = View.GONE
+                tvTitle.text = getString(R.string.profile)
 
-                    editMode = false
-                } else {
-                    tvTitle.text = getString(R.string.edit_profile)
-                    ibEdit.setImageResource(R.drawable.ic_check)
-                    ibEditImage.visibility = View.VISIBLE
-                    etName.visibility = View.VISIBLE
-
-                    editMode = true
-                }
+                val name = etName.text.toString()
+                viewModel.updateName(name)
+                viewModel.getCurrentUser()
             }
 
             ibEditImage.setOnClickListener {
@@ -97,10 +94,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     tvName.text = it.name
                     tvEmail.text = it.email
                     tvCreatedAt.text = formatTimestamp(it.timestamp)
-                    tvFavourite.text = it.favourites
-
                     etName.setText(it.name)
                 }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.favourites.collect{
+                binding.tvFavourite.text = it.toString()
             }
         }
 

@@ -1,27 +1,36 @@
 {
   "project_info": {
-    "project_number": "352400926029",
-    "firebase_url": "https://book-app-ac664-default-rtdb.firebaseio.com",
-    "project_id": "book-app-ac664",
-    "storage_bucket": "book-app-ac664.appspot.com"
+    "project_number": "906511495642",
+    "project_id": "login-register-firebase-3800a",
+    "storage_bucket": "login-register-firebase-3800a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:352400926029:android:80e53ab073a4fb41a84304",
+        "mobilesdk_app_id": "1:906511495642:android:8cc0f4ed0c3c5a31fc50e3",
         "android_client_info": {
           "package_name": "com.renbin.bookproject"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "906511495642-h63l778io6vm11d564avjhmrfi3pn0i6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyA8Wm4hTlqP2gsocCi6LqF2aipSFInAGyE"
+          "current_key": "AIzaSyDPyR3u8BtyKj02WPVgKYzD8rsBQQNBx5k"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906511495642-h63l778io6vm11d564avjhmrfi3pn0i6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
