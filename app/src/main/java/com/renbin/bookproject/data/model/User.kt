@@ -5,7 +5,6 @@ data class User(
     val name: String,
     val email: String,
     val profilePicUrl: String = "",
-    val favourites: String = "0",
     val timestamp: Long = System.currentTimeMillis()
 ) {
     fun toHashMap(): HashMap<String, Any> {
@@ -13,7 +12,6 @@ data class User(
             "name" to name,
             "email" to email,
             "profilePicUrl" to profilePicUrl,
-            "favourites" to favourites,
             "timestamp" to timestamp
         )
     }
@@ -25,7 +23,6 @@ data class User(
                 name = hash["name"].toString(),
                 email = hash["email"].toString(),
                 profilePicUrl = hash["profilePicUrl"].toString(),
-                favourites = hash["favourites"].toString(),
                 timestamp = hash["timestamp"].toString().toLong()
             )
         }

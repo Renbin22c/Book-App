@@ -29,6 +29,7 @@
             android:layout_marginStart="10dp"
             android:text="@string/toast"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
     </LinearLayout>
 

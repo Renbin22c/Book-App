@@ -18,5 +18,6 @@
         android:layout_height="wrap_content"
         android:text="@string/book_app"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="20sp"/>
 </LinearLayout>

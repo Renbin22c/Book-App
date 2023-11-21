@@ -19,4 +19,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="TextViewBlackHandler">
+        <item name="colorControlActivated">@color/black</item>
+    </style>
+
 </resources>

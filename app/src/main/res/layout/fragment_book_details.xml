@@ -24,10 +24,11 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:text="@string/book_details"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/ibFavourite"
@@ -94,6 +95,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/book_title"
                             android:textSize="18sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold"/>
 
                         <TableLayout
@@ -108,7 +110,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="@string/category"/>
+                                    android:text="@string/category"
+                                    android:textColor="@color/black"/>
 
                                 <TextView
                                     android:id="@+id/tvCategory"
@@ -117,7 +120,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:layout_marginEnd="20dp"
-                                    android:text="@string/n_a"/>
+                                    android:text="@string/n_a"
+                                    android:textColor="@color/black"/>
                             </TableRow>
 
                             <TableRow
@@ -128,7 +132,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="@string/date"/>
+                                    android:text="@string/date"
+                                    android:textColor="@color/black"/>
 
                                 <TextView
                                     android:id="@+id/tvDate"
@@ -136,7 +141,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="5dp"
-                                    android:text="@string/n_a"/>
+                                    android:text="@string/n_a"
+                                    android:textColor="@color/black"/>
                             </TableRow>
 
                             <TableRow
@@ -147,7 +153,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="@string/size"/>
+                                    android:text="@string/size"
+                                    android:textColor="@color/black"/>
 
                                 <TextView
                                     android:id="@+id/tvSize"
@@ -155,7 +162,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="5dp"
-                                    android:text="@string/n_a"/>
+                                    android:text="@string/n_a"
+                                    android:textColor="@color/black"/>
                             </TableRow>
 
                             <TableRow
@@ -166,7 +174,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="@string/page"/>
+                                    android:text="@string/page"
+                                    android:textColor="@color/black"/>
 
                                 <TextView
                                     android:id="@+id/tvPage"
@@ -174,7 +183,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="5dp"
-                                    android:text="@string/n_a"/>
+                                    android:text="@string/n_a"
+                                    android:textColor="@color/black"/>
                             </TableRow>
                         </TableLayout>
                     </LinearLayout>
@@ -188,6 +198,7 @@
                 android:layout_marginStart="5dp"
                 android:padding="10dp"
                 android:text="@string/the_description_of_the_book"
+                android:textColor="@color/black"
                 style="@style/TextAppearance.AppCompat.Title"/>
 
             <TextView
@@ -198,6 +209,7 @@
                 android:layout_marginStart="5dp"
                 android:paddingHorizontal="10dp"
                 android:text="@string/description"
+                android:textColor="@color/black"
                 style="@style/TextAppearance.Material3.BodyLarge"/>
         </LinearLayout>
     </ScrollView>
@@ -212,6 +224,7 @@
         android:backgroundTint="@color/black"
         app:icon="@drawable/ic_book"
         app:iconGravity="textStart"
-        android:text="@string/read_book"/>
+        android:text="@string/read_book"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

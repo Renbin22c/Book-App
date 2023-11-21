@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="@string/book_title"
+            android:textColor="@color/black"
             android:layout_toStartOf="@id/btnMore"
             android:layout_toEndOf="@id/rlPdf"
             android:ellipsize="end"
@@ -53,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/book_description"
+            android:textColor="@color/black"
             android:layout_below="@id/tvTitle"
             android:layout_toEndOf="@id/rlPdf"
             android:ellipsize="end"
@@ -65,6 +67,7 @@
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:text="@string/category"
             android:textAlignment="textStart"
+            android:textColor="@color/black"
             android:layout_marginBottom="2dp"
             android:layout_toEndOf="@id/rlPdf"
             android:layout_above="@id/tvSize"/>
@@ -75,6 +78,7 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:text="@string/page"
+            android:textColor="@color/black"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:maxLines="1"/>
@@ -85,6 +89,7 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:text="@string/size"
+            android:textColor="@color/black"
             android:layout_toEndOf="@id/rlPdf"
             android:layout_alignParentBottom="true"
             android:maxLines="1"/>
@@ -96,6 +101,7 @@
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:text="@string/time"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:layout_toEndOf="@id/tvSize"
             android:layout_toStartOf="@id/tvPage"
             android:layout_alignParentBottom="true"

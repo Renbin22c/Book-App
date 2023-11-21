@@ -36,6 +36,7 @@
             android:layout_below="@id/ivLogo"
             android:text="@string/add_a_new_book"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="20sp"/>
 
         <ImageButton
@@ -84,6 +85,8 @@
                 android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColorHighlight="@color/white"
+                android:theme="@style/TextViewBlackHandler"
                 android:hint="@string/book_title"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,6 +103,8 @@
                 android:id="@+id/etDesc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColorHighlight="@color/white"
+                android:theme="@style/TextViewBlackHandler"
                 android:gravity="top"
                 android:minLines="8"
                 android:hint="@string/book_description"/>
@@ -111,6 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add"
+        android:textColor="@color/white"
         android:backgroundTint="@color/black"
         android:layout_marginHorizontal="25dp"
         android:layout_alignParentBottom="true"
