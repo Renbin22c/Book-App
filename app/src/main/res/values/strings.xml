@@ -74,4 +74,5 @@
     <string name="logout_conformation">Logout Conformation</string>
     <string name="toast">Toast</string>
     <string name="toast_icon">Toast Icon</string>
+    <string name="please_reconnect_the_network">Please reconnect the network</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.renbin.bookproject.core.service.AuthService
+import com.renbin.bookproject.core.service.StorageService
 import com.renbin.bookproject.data.model.Book
 import com.renbin.bookproject.data.model.Category
 import com.renbin.bookproject.data.repo.BookRepo
@@ -23,7 +24,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val categoryRepo: CategoryRepo,
     private val authService: AuthService,
-    private val bookRepo: BookRepo
+    private val bookRepo: BookRepo,
+    private val storage: StorageService
 ) : BaseViewModel() {
     private val _categories: MutableStateFlow<List<Category>> = MutableStateFlow(emptyList())
     val categories: StateFlow<List<Category>> = _categories
@@ -34,12 +36,10 @@ class HomeViewModel @Inject constructor(
     private val _folderState: MutableLiveData<Boolean> = MutableLiveData(true)
     val folderState: LiveData<Boolean> = _folderState
 
-    private val _loading: MutableSharedFlow<Boolean>  = MutableSharedFlow()
-    val loading: SharedFlow<Boolean> = _loading
-
     private val user = authService.getCurrentUser()
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getAllCategories()
         getAllBooks()
     }
@@ -52,21 +52,21 @@ class HomeViewModel @Inject constructor(
                     categoryRepo.getAllCategories(currentUser.uid)
                 }?.collect{
                     _categories.value = it
+                    _loading.emit(false)
                 }
             }
-            _loading.emit(false)
         }
     }
 
     private fun getAllBooks() {
-        user?.let { currentUser ->
-            viewModelScope.launch(Dispatchers.IO) {
-                user.let { currentUser ->
-                    safeApiCall {
-                        bookRepo.getAllBooks(currentUser.uid)
-                    }?.collect {
-                        _books.value = it
-                    }
+        viewModelScope.launch(Dispatchers.IO) {
+            _loading.emit(true)
+            user?.let { currentUser ->
+                safeApiCall {
+                    bookRepo.getAllBooks(currentUser.uid)
+                }?.collect {
+                    _books.value = it
+                    _loading.emit(false)
                 }
             }
         }
@@ -79,9 +79,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun deleteBook(id: String){
+    fun deleteBook(id: String, url: String){
         viewModelScope.launch(Dispatchers.IO) {
             bookRepo.delete(id)
+            storage.deletePdf(url)
             _success.emit("Delete Book Successfully !")
         }
     }

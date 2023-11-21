@@ -11,6 +11,10 @@ abstract class BaseViewModel : ViewModel() {
     protected val _success: MutableSharedFlow<String> = MutableSharedFlow()
     val success: SharedFlow<String> = _success
 
+    protected val _loading: MutableSharedFlow<Boolean>  = MutableSharedFlow()
+    val loading: SharedFlow<Boolean> = _loading
+    open fun onCreate(){}
+
     suspend fun <T> safeApiCall(callback: suspend () -> T?): T? {
         return try {
             callback()

@@ -68,4 +68,16 @@ abstract class BaseAddEditPdfFragment : BaseFragment<FragmentBaseAddEditPdfBindi
             }
         }
     }
+
+    protected fun validate(title: String, desc: String, category: String): String?{
+        return if (title.isEmpty()){
+            "Title cannot be empty !!!"
+        } else if(desc.isEmpty()){
+            "Description cannot be empty !!!"
+        } else if(category.isEmpty()){
+            "Category cannot be empty !!!"
+        } else{
+            null
+        }
+    }
 }

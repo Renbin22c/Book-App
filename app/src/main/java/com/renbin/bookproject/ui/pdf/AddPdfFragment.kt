@@ -44,16 +44,26 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
             }
 
             btnSubmit.setOnClickListener {
-                val timestamp = System.currentTimeMillis()
-                val filePathAndName = "Books/$timestamp.pdf"
-                uploadPdfToStorage(filePathAndName)
+                val title = binding.etTitle.text.toString().trim()
+                val desc = binding.etDesc.text.toString().trim()
+                val category = categorySelect
+
+                val error = validate(title, desc, category)
+
+                if(!error.isNullOrEmpty()){
+                    showToast(requireContext(), error.toString(), R.drawable.ic_pdf)
+                } else{
+                    val timestamp = System.currentTimeMillis()
+                    val filePathAndName = "Books/$timestamp.pdf"
+                    uploadPdfToStorage(filePathAndName)
+                }
             }
         }
     }
 
     private fun saveBookToFirebase(url: String, link: String){
-        val title = binding.etTitle.text.toString()
-        val desc = binding.etDesc.text.toString()
+        val title = binding.etTitle.text.toString().trim()
+        val desc = binding.etDesc.text.toString().trim()
         val category = categorySelect
 
         viewModel.submit(title,desc,category,url,link)
@@ -106,5 +116,4 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
         intent.type = "application/pdf"
         resultLauncher.launch(Intent.createChooser(intent, "Select Pdf"))
     }
-
 }

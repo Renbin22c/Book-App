@@ -20,10 +20,9 @@ class CategoryRepoRealtimeImpl(
             override fun onDataChange(snapshot: DataSnapshot) {
                 val categories = mutableListOf<Category>()
                 for (categorySnapshot in snapshot.children) {
-                    categorySnapshot.getValue<Category>()?.let {
-                        if (it.uid == uid) {
-                            categories.add(it.copy(id = categorySnapshot.key ?: ""))
-                        }
+                    val category = categorySnapshot.getValue(Category::class.java)
+                    if(category != null && category.uid == uid){
+                        categories.add(category.copy(id = categorySnapshot.key ?: ""))
                     }
                 }
                 trySend(categories)

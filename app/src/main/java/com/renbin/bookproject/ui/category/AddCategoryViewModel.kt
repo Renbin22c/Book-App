@@ -22,6 +22,7 @@ class AddCategoryViewModel @Inject constructor(
             val category = Category(category = category)
             viewModelScope.launch(Dispatchers.IO) {
                 safeApiCall { repo.insert(category, currentUser.uid) }
+                _success.emit("Add Category Successfully!!!")
             }
         }
     }

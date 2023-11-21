@@ -1,13 +1,11 @@
 package com.renbin.bookproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -44,6 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun setupUIComponents() {
         super.setupUIComponents()
+
         setupCategoryAdapter()
         setupBookAdapter()
         search()
@@ -51,7 +50,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.run {
             btnCategory.setOnClickListener {
                 val dialogFragment = AddCategoryPopUpFragment()
-                // Show the dialog fragment using childFragmentManager
                 dialogFragment.show(childFragmentManager, "AddCategoryPopUpFragment")
             }
 
@@ -80,28 +78,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
-            viewModel.categories.collect { categories ->
-                val sortedCategories = categories.sortedBy { it.timestamp }
-                categoryAdapter.setCategories(sortedCategories)
-                empty()
+            viewModel.categories.collect {
+                categoryAdapter.setCategories(it)
+                if (categoryAdapter.itemCount > 0)
+                    binding.tvEmpty.visibility = View.GONE
             }
         }
 
         lifecycleScope.launch {
             viewModel.books.collect{
                 bookAdapter.setBooks(it)
-                empty()
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.loading.collect{
-                Log.d("debugging", it.toString())
-                if (it){
-                    binding.progressBar.visibility = View.VISIBLE
-                } else{
-                    binding.progressBar.visibility = View.GONE
-                }
             }
         }
 
@@ -109,6 +95,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             viewModel.folderState.observe(viewLifecycleOwner) { isFolderVisible ->
                 folder = isFolderVisible
                 updateUIBasedOnFolderState()
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.loading.collect{
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
+                } else{
+                    binding.progressBar.visibility = View.GONE
+                    if(folder){
+                        if(categoryAdapter.itemCount == 0)
+                            binding.tvEmpty.visibility = View.VISIBLE
+                        else binding.tvEmpty.visibility = View.GONE
+                    }else{
+                        if(bookAdapter.itemCount == 0)
+                            binding.tvEmpty.visibility = View.VISIBLE
+                        else binding.tvEmpty.visibility = View.GONE
+                    }
+                }
             }
         }
     }
@@ -153,30 +158,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.rvCategory.visibility = View.VISIBLE
             binding.llBook.visibility = View.GONE
             binding.ibFolder.setImageResource(R.drawable.ic_folder)
-            empty()
+            binding.tvEmpty.text = getString(R.string.your_category_is_empty)
+            if (categoryAdapter.itemCount > 0)
+                binding.tvEmpty.visibility = View.GONE
         } else {
             binding.rvCategory.visibility = View.GONE
             binding.llBook.visibility = View.VISIBLE
             binding.ibFolder.setImageResource(R.drawable.ic_folder_off)
-            empty()
-        }
-    }
-
-    private fun empty(){
-        if(folder){
-            if (categoryAdapter.itemCount == 0){
-                binding.tvEmpty.text = getString(R.string.your_category_is_empty)
+            binding.tvEmpty.text = getString(R.string.your_book_is_empty)
+            if (bookAdapter.itemCount == 0)
                 binding.tvEmpty.visibility = View.VISIBLE
-            } else {
+            else
                 binding.tvEmpty.visibility = View.GONE
-            }
-        } else {
-            if (bookAdapter.itemCount == 0){
-                binding.tvEmpty.text = getString(R.string.your_book_is_empty)
-                binding.tvEmpty.visibility = View.VISIBLE
-            } else {
-                binding.tvEmpty.visibility = View.GONE
-            }
         }
     }
 
@@ -208,11 +201,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         popupMenu.setForceShowIcon(true)
         popupMenu.show()
 
-
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.deleteBook -> {
-                    viewModel.deleteBook(book.id)
+                    viewModel.deleteBook(book.id, book.url)
                     true
                 }
 

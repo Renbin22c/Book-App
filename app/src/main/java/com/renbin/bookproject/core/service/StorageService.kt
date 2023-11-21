@@ -20,4 +20,8 @@ class StorageService(
             null
         }
     }
+
+    suspend fun deletePdf(url:String){
+        storage.child(url).delete().await()
+    }
 }

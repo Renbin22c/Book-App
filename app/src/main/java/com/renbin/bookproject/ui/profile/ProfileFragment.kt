@@ -97,7 +97,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     tvName.text = it.name
                     tvEmail.text = it.email
                     tvCreatedAt.text = formatTimestamp(it.timestamp)
-                    tvFavourite.text = it.favourites.toString()
+                    tvFavourite.text = it.favourites
 
                     etName.setText(it.name)
                 }
@@ -116,10 +116,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         lifecycleScope.launch {
             viewModel.books.collect{
                 adapter.setFavouriteBooks(it)
-                if (adapter.itemCount == 0){
-                    binding.tvEmpty.visibility = View.VISIBLE
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.loading.collect{
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
                 } else{
-                    binding.tvEmpty.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    if (adapter.itemCount == 0) binding.tvEmpty.visibility = View.VISIBLE
                 }
             }
         }

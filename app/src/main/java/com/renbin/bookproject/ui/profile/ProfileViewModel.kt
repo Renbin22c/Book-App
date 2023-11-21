@@ -11,7 +11,9 @@ import com.renbin.bookproject.data.repo.UserRepo
 import com.renbin.bookproject.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,7 +36,8 @@ class ProfileViewModel @Inject constructor(
 
     private val firebaseUser = authService.getCurrentUser()
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         getCurrentUser()
         getProfilePicUri()
     }
@@ -119,6 +122,7 @@ class ProfileViewModel @Inject constructor(
     private fun getBookByFavourite(){
         firebaseUser?.let {
             viewModelScope.launch(Dispatchers.IO){
+                _loading.emit(true)
                 safeApiCall {
                     bookRepo.getBookByFavourite(it.uid)
                 }?.collect{
@@ -126,6 +130,7 @@ class ProfileViewModel @Inject constructor(
                     val count = it.count().toString()
                     updateUserFavourite(count)
                     getCurrentUser()
+                    _loading.emit(false)
                 }
             }
         }

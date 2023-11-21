@@ -56,10 +56,16 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
         lifecycleScope.launch {
             viewModel.books.collect{
                 adapter.setBooks(it)
-                if (adapter.itemCount == 0){
-                    binding.tvEmpty.visibility = View.VISIBLE
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.loading.collect{
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
                 } else{
-                    binding.tvEmpty.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    if (adapter.itemCount == 0) binding.tvEmpty.visibility = View.VISIBLE
                 }
             }
         }
@@ -116,7 +122,7 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.deleteBook -> {
-                    viewModel.deleteBook(book.id)
+                    viewModel.deleteBook(book.id, book.url)
                     true
                 }
 
