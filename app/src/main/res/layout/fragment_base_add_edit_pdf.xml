@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/ic_back"
+            android:contentDescription="@string/back" />
 
         <ImageView
             android:id="@+id/ivLogo"
@@ -46,68 +47,75 @@
             android:layout_margin="10dp"
             android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_attach"/>
+            android:src="@drawable/ic_attach"
+            android:contentDescription="@string/pdf" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rlTop"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:paddingHorizontal="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
-            app:startIconDrawable="@drawable/ic_category"
-            app:hintTextColor="@color/black"
             app:boxStrokeColor="@color/black"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_category">
+
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/book_category"
                 android:inputType="none"
-                android:padding="16dp"/>
+                android:padding="16dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilTitle"
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
-            app:startIconDrawable="@drawable/ic_pdf"
-            app:hintTextColor="@color/black"
             app:boxStrokeColor="@color/black"
-            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox">
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_pdf">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:hint="@string/book_title"
                 android:textColorHighlight="@color/white"
-                android:theme="@style/TextViewBlackHandler"
-                android:hint="@string/book_title"/>
+                android:theme="@style/TextViewBlackHandler" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilDesc"
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
-            app:startIconDrawable="@drawable/ic_pdf"
-            app:hintTextColor="@color/black"
             app:boxStrokeColor="@color/black"
-            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox">
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_pdf">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDesc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHighlight="@color/white"
-                android:theme="@style/TextViewBlackHandler"
                 android:gravity="top"
+                android:hint="@string/book_description"
                 android:minLines="8"
-                android:hint="@string/book_description"/>
+                android:textColorHighlight="@color/white"
+                android:theme="@style/TextViewBlackHandler" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 

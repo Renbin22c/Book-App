@@ -75,4 +75,7 @@
     <string name="toast">Toast</string>
     <string name="toast_icon">Toast Icon</string>
     <string name="please_reconnect_the_network">Please reconnect the network</string>
+    <string name="image">Image</string>
+    <string name="close">Close</string>
+    <string name="pdf">PDF</string>
 </resources>

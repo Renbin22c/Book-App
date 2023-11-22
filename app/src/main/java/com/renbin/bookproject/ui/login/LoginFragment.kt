@@ -51,6 +51,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     tvForgot.text = getString(R.string.forgot_password)
                     tvTitle.text = getString(R.string.please_login)
                     btnLogin.text = getString(R.string.login)
+                    etEmail.text?.clear()
+                    etPassword.text?.clear()
 
                     forgotMode = false
 
@@ -59,6 +61,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     tvForgot.text = getString(R.string.use_password_to_login)
                     tvTitle.text = getString(R.string.reset_password)
                     btnLogin.text = getString(R.string.send)
+                    etEmail.text?.clear()
+                    etPassword.text?.clear()
 
                     forgotMode = true
                 }
