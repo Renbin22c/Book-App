@@ -1,14 +1,9 @@
 package com.renbin.bookproject.data.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 @Entity
 data class Book(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo("todoId")
-    val _id: Int? = null,
     val id: String = "",
     val title: String = "",
     val desc: String = "",

@@ -44,7 +44,6 @@ class SplashFragment : Fragment() {
                 navController.navigate(action)
             }
         }, 2000)
-
     }
 
 }
