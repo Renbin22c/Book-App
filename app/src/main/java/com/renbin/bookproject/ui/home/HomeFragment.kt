@@ -187,6 +187,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     navController.navigate(action)
                     true
                 }
+                R.id.recycleBin->{
+                    val action = HomeFragmentDirections.actionHomeToRecycleBook()
+                    navController.navigate(action)
+                    true
+                }
                 else -> {
                     alertLogout()
                     true
@@ -204,7 +209,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.deleteBook -> {
-                    viewModel.deleteBook(book.id, book.url)
+                    viewModel.addRecycleBook(
+                        book.title, book.desc, book.category, book.link,
+                        book.url, book.uid, book.timestamp
+                    )
+                    viewModel.deleteBook(book.id)
                     true
                 }
 

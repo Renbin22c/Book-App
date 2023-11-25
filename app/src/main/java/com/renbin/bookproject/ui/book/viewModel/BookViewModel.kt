@@ -5,7 +5,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.renbin.bookproject.core.service.AuthService
 import com.renbin.bookproject.core.service.StorageService
 import com.renbin.bookproject.data.model.Book
+import com.renbin.bookproject.data.model.RecycleBook
 import com.renbin.bookproject.data.repo.BookRepo
+import com.renbin.bookproject.data.repo.RecycleBookRepo
 import com.renbin.bookproject.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookViewModel @Inject constructor(
     private val repo: BookRepo,
+    private val recycleBookRepo: RecycleBookRepo,
     private val authService: AuthService,
     private val storage: StorageService
 ): BaseViewModel() {
@@ -40,11 +43,22 @@ class BookViewModel @Inject constructor(
         }
     }
 
-    fun deleteBook(id: String, url:String){
+    fun deleteBook(id: String){
         viewModelScope.launch(Dispatchers.IO) {
             repo.delete(id)
-            storage.deletePdf(url)
             _success.emit("Delete Book Successfully !")
+        }
+    }
+
+    fun addRecycleBook(title: String, desc: String, category: String,
+                       link: String, url: String, uid:String, timeStamp: Long){
+        val recycleBook = RecycleBook(
+            title = title, desc = desc, category = category, link = link,
+            url = url, uid = uid, timestamp = timeStamp)
+        viewModelScope.launch(Dispatchers.IO) {
+            safeApiCall {
+                recycleBookRepo.insert(recycleBook)
+            }
         }
     }
 

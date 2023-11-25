@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_person"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/recycleBin"
+        android:title="@string/recycle_bin"
+        android:icon="@drawable/ic_recycling"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/Logout"
         android:title="@string/logout"
         android:icon="@drawable/ic_logout"

@@ -12,6 +12,7 @@ import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.storage.FirebaseStorage
 import com.renbin.bookproject.R
 import com.renbin.bookproject.data.model.Book
+import com.renbin.bookproject.data.model.RecycleBook
 import java.util.Calendar
 import java.util.Locale
 
@@ -41,6 +42,41 @@ object Utility {
         if(url.isNotEmpty()){
             FirebaseStorage.getInstance()
                 .getReference(book.url)
+                .getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener {
+                    progressBar.visibility = View.GONE
+                    val fileSize = it.size.toDouble()
+                    val sizeText = when {
+                        fileSize >= 1024 * 1024 -> "%.2f MB".format(fileSize / (1024 * 1024))
+                        fileSize >= 1024 -> "%.2f KB".format(fileSize / 1024)
+                        else -> "%.2f bytes".format(fileSize)
+                    }
+                    try {
+                        sizeView.text = sizeText
+                        pageView.text = pdfView.pageCount.toString()
+                        pdfView.fromBytes(it)
+                            .enableSwipe(false)
+                            .onError {  e ->
+                                throw e
+                            }
+                            .onLoad {
+                                pageView.text = "${pdfView.pageCount} page"
+                            }
+                            .load()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+        }
+    }
+
+    fun loadRecycleBookPdf(recycleBook: RecycleBook, pdfView: PDFView, sizeView: TextView, progressBar: ProgressBar, pageView: TextView) {
+        pdfView.recycle()
+        progressBar.visibility = View.VISIBLE
+        val url = recycleBook.url
+        if(url.isNotEmpty()){
+            FirebaseStorage.getInstance()
+                .getReference(recycleBook.url)
                 .getBytes(Long.MAX_VALUE)
                 .addOnSuccessListener {
                     progressBar.visibility = View.GONE

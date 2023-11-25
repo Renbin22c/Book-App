@@ -122,7 +122,11 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.deleteBook -> {
-                    viewModel.deleteBook(book.id, book.url)
+                    viewModel.addRecycleBook(
+                        book.title, book.desc, book.category, book.link,
+                        book.url, book.uid, book.timestamp
+                    )
+                    viewModel.deleteBook(book.id)
                     true
                 }
 
