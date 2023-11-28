@@ -1,12 +1,8 @@
 package com.renbin.bookproject.ui.book.viewModel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.renbin.bookproject.core.service.AuthService
 import com.renbin.bookproject.data.model.Book
-import com.renbin.bookproject.data.model.User
 import com.renbin.bookproject.data.repo.BookRepo
-import com.renbin.bookproject.data.repo.UserRepo
 import com.renbin.bookproject.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,11 +15,15 @@ import javax.inject.Inject
 class BookDetailsViewModel @Inject constructor(
     private val bookRepo: BookRepo
 ): BaseViewModel() {
+
+    // MutableStateFlow representing the current book state
     private val _book: MutableStateFlow<Book> = MutableStateFlow(
         Book(title = "", desc = "", category = "")
     )
+    // StateFlow exposing the current book state to observers
     val book: StateFlow<Book> = _book
 
+    // Retrieves a specific book by its ID
     fun getBook(id:String){
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {
@@ -34,6 +34,7 @@ class BookDetailsViewModel @Inject constructor(
         }
     }
 
+    // Updates the favorite status of the current book
     fun updateBookFavourite(favourite: Boolean){
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {

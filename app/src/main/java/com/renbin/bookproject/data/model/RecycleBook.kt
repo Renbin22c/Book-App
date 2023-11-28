@@ -3,7 +3,7 @@ package com.renbin.bookproject.data.model
 import androidx.room.Entity
 
 @Entity
-data class Book(
+data class RecycleBook(
     val id: String = "",
     val title: String = "",
     val desc: String = "",
@@ -12,9 +12,9 @@ data class Book(
     val url: String = "",
     val link: String ="",
     val uid: String = "",
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = 0
 ){
-    // Converts the Book object to a HashMap for storing in a database
+    // Converts the Recycle Book object to a HashMap for storing in a database
     fun toHashMap(): HashMap<String, Any>{
         return hashMapOf(
             "title" to title,
@@ -28,7 +28,7 @@ data class Book(
         )
     }
 
-    // Creates a Book object from a HashMap retrieved from the database
+    // Creates a Recycle Book object from a HashMap retrieved from the database
     companion object{
         fun fromHashMap(hash: Map<String, Any>): Book{
             return Book(

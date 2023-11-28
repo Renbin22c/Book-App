@@ -21,8 +21,9 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private var pdfUri: Uri? = null
 
-    override fun setupUIComponents() {
-        super.setupUIComponents()
+    // Set up the result launcher for handling file picker results
+    override fun onFragmentResult() {
+        super.onFragmentResult()
 
         resultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -37,6 +38,10 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
                 showToast(requireContext(), "Cancelled picking pdf", R.drawable.ic_pdf)
             }
         }
+    }
+
+    override fun setupUIComponents() {
+        super.setupUIComponents()
 
         binding.run {
             ibAttach.setOnClickListener {
@@ -44,6 +49,7 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
             }
 
             btnSubmit.setOnClickListener {
+                // Extract information from UI fields and validate
                 val title = binding.etTitle.text.toString().trim()
                 val desc = binding.etDesc.text.toString().trim()
                 val category = categorySelect
@@ -53,6 +59,7 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
                 if(!error.isNullOrEmpty()){
                     showToast(requireContext(), error.toString(), R.drawable.ic_pdf)
                 } else{
+                    // Generate a timestamp and upload the PDF to storage
                     val timestamp = System.currentTimeMillis()
                     val filePathAndName = "Books/$timestamp.pdf"
                     uploadPdfToStorage(filePathAndName)
@@ -61,6 +68,7 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
         }
     }
 
+    // Save the updated book information to Firebase
     private fun saveBookToFirebase(url: String, link: String){
         val title = binding.etTitle.text.toString().trim()
         val desc = binding.etDesc.text.toString().trim()
@@ -69,6 +77,7 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
         viewModel.submit(title,desc,category,url,link)
     }
 
+    // Upload the selected PDF to Firebase Storage
     private fun uploadPdfToStorage(filePathAndName: String) {
         pdfUri?.let { uri ->
             val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
@@ -109,8 +118,7 @@ class AddPdfFragment: BaseAddEditPdfFragment() {
         } ?: showToast(requireContext(), "PDF file is null", R.drawable.ic_pdf)
     }
 
-
-
+    // Open the file picker to choose a PDF file
     private fun openFilePicker() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "application/pdf"

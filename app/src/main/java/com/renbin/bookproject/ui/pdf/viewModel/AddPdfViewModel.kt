@@ -18,8 +18,8 @@ class AddPdfViewModel @Inject constructor(
 ): BaseAddEditPdfViewModel(categoryRepo, authService) {
     val user = authService.getCurrentUser()
 
+    // Function to submit a new book to the repository
     fun submit(title: String, desc: String, category: String, url: String, link: String) {
-
         val book = Book(title = title, desc= desc, category = category, url = url, link = link)
         viewModelScope.launch(Dispatchers.IO) {
             user?.let {currentUser ->

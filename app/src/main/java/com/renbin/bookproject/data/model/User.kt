@@ -7,6 +7,7 @@ data class User(
     val profilePicUrl: String = "",
     val timestamp: Long = System.currentTimeMillis()
 ) {
+    // Converts the User object to a HashMap for storing in a database
     fun toHashMap(): HashMap<String, Any> {
         return hashMapOf(
             "name" to name,
@@ -16,6 +17,7 @@ data class User(
         )
     }
 
+    // Creates a User object from a HashMap retrieved from the database
     companion object {
         fun fromHashMap(hash: Map<String, Any>): User {
             return User(

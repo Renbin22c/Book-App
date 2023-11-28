@@ -24,15 +24,18 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Finding the NavController associated with this fragment
         navController = NavHostFragment.findNavController(this)
 
         binding.run {
             btnLogin.setOnClickListener {
+                // Navigate to the login destination when the login button is clicked
                 val action = MainFragmentDirections.actionGlobalLogin()
                 navController.navigate(action)
             }
 
             btnRegister.setOnClickListener {
+                // Navigate to the register destination when the register button is clicked
                 val action = MainFragmentDirections.actionGlobalRegister()
                 navController.navigate(action)
             }

@@ -12,10 +12,12 @@ import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.storage.FirebaseStorage
 import com.renbin.bookproject.R
 import com.renbin.bookproject.data.model.Book
+import com.renbin.bookproject.data.model.RecycleBook
 import java.util.Calendar
 import java.util.Locale
 
 object Utility {
+    // Displays a custom toast message with an icon
     fun showToast(context: Context, message: String, iconResourceId: Int) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layout = inflater.inflate(R.layout.custom_toast, null)
@@ -34,6 +36,7 @@ object Utility {
     }
 
 
+    // Loads a PDF into a PDFView and updates related UI components
     fun loadPdf(book: Book, pdfView: PDFView, sizeView: TextView, progressBar: ProgressBar, pageView: TextView) {
         pdfView.recycle()
         progressBar.visibility = View.VISIBLE
@@ -69,6 +72,43 @@ object Utility {
         }
     }
 
+    // Loads a recycled PDF into a PDFView and updates related UI components
+    fun loadRecycleBookPdf(recycleBook: RecycleBook, pdfView: PDFView, sizeView: TextView, progressBar: ProgressBar, pageView: TextView) {
+        pdfView.recycle()
+        progressBar.visibility = View.VISIBLE
+        val url = recycleBook.url
+        if(url.isNotEmpty()){
+            FirebaseStorage.getInstance()
+                .getReference(recycleBook.url)
+                .getBytes(Long.MAX_VALUE)
+                .addOnSuccessListener {
+                    progressBar.visibility = View.GONE
+                    val fileSize = it.size.toDouble()
+                    val sizeText = when {
+                        fileSize >= 1024 * 1024 -> "%.2f MB".format(fileSize / (1024 * 1024))
+                        fileSize >= 1024 -> "%.2f KB".format(fileSize / 1024)
+                        else -> "%.2f bytes".format(fileSize)
+                    }
+                    try {
+                        sizeView.text = sizeText
+                        pageView.text = pdfView.pageCount.toString()
+                        pdfView.fromBytes(it)
+                            .enableSwipe(false)
+                            .onError {  e ->
+                                throw e
+                            }
+                            .onLoad {
+                                pageView.text = "${pdfView.pageCount} page"
+                            }
+                            .load()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+        }
+    }
+
+    // Formats a timestamp into a human-readable date string
     fun formatTimestamp(timestamp: Long): String {
         val cal = Calendar.getInstance(Locale.ENGLISH)
         cal.timeInMillis = timestamp

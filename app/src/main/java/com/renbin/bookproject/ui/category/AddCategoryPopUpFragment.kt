@@ -30,21 +30,26 @@ class AddCategoryPopUpFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
+            // Close the dialog when the close button is clicked
             ivClose.setOnClickListener { dismiss() }
-            btnAdd.setOnClickListener {
-                validateData()
-            }
+
+            // Validate and submit the category when the add button is clicked
+            btnAdd.setOnClickListener { validateData() }
         }
 
     }
 
+    // Validate user input and submit the category
     private fun validateData(){
         category = binding.etTodo.text.toString().trim()
 
         if(TextUtils.isEmpty(category)){
             showToast(requireContext(), "Please enter category !!!", R.drawable.ic_pdf)
         } else{
+            // Submit the category to the ViewModel for processing
             viewModel.submit(category)
+
+            // Close the dialog after submission
             dismiss()
         }
     }

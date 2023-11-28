@@ -20,16 +20,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         dialog = MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialog_Rounded)
             .setView(R.layout.network_dialog)
             .setCancelable(false)
             .create()
 
         val networkManager = NetworkManager(this)
+
+        // Set up the network connectivity observer
         networkManager.observe(this){
             if(!it){
+                // Show the network dialog if there is no network connectivity
                 if (!dialog.isShowing) dialog.show()
             } else{
+                // Hide the network dialog if there is network connectivity
                 if(dialog.isShowing) dialog.hide()
             }
         }

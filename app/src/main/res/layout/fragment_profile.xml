@@ -76,15 +76,17 @@
                     android:id="@+id/flProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivProfile"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_margin="15dp"
+                        android:scaleType="centerCrop"
+                        android:adjustViewBounds="true"
                         android:src="@drawable/ic_person"
                         android:background="@color/gray"
-                        app:shapeAppearance="@style/styleRoundedCornersImage"
-                        android:elevation="10dp"/>
+                        app:shapeAppearance="@style/styleRoundedCornersImage"/>
 
                     <ImageButton
                         android:id="@+id/ibEditImage"
@@ -93,7 +95,8 @@
                         android:src="@drawable/ic_add"
                         android:visibility="gone"
                         android:background="@android:color/transparent"
-                        android:layout_gravity="end"/>
+                        android:layout_gravity="end"
+                        android:contentDescription="@string/image" />
                 </FrameLayout>
 
                 <TableLayout

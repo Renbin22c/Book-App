@@ -15,6 +15,7 @@ import com.renbin.bookproject.ui.base.BaseFragment
 import com.renbin.bookproject.ui.pdf.viewModel.BaseAddEditPdfViewModel
 import kotlinx.coroutines.launch
 
+// Base Fragment for adding/editing PDF
 abstract class BaseAddEditPdfFragment : BaseFragment<FragmentBaseAddEditPdfBinding>() {
     abstract override val viewModel: BaseAddEditPdfViewModel
     private lateinit var categoryAdapter: ArrayAdapter<String>
@@ -31,6 +32,7 @@ abstract class BaseAddEditPdfFragment : BaseFragment<FragmentBaseAddEditPdfBindi
 
     override fun setupViewModelObserver() {
         lifecycleScope.launch {
+            // Observe the list of category names and update the adapter
             viewModel.categoryName.collect {
                 categoryAdapter = ArrayAdapter(
                     requireContext(),
@@ -42,6 +44,7 @@ abstract class BaseAddEditPdfFragment : BaseFragment<FragmentBaseAddEditPdfBindi
         }
 
         lifecycleScope.launch {
+            // Observe success events and pop back from the fragment
             viewModel.success.collect{
                 navController.popBackStack()
             }
@@ -58,6 +61,7 @@ abstract class BaseAddEditPdfFragment : BaseFragment<FragmentBaseAddEditPdfBindi
         )
 
         binding.run {
+            // Observe changes in the category text field
             autoCompleteCategory.addTextChangedListener {
                 categorySelect = it.toString()
                 Log.d("debugging", categorySelect)
@@ -69,6 +73,7 @@ abstract class BaseAddEditPdfFragment : BaseFragment<FragmentBaseAddEditPdfBindi
         }
     }
 
+    // Function to validate input fields
     protected fun validate(title: String, desc: String, category: String): String?{
         return if (title.isEmpty()){
             "Title cannot be empty !!!"

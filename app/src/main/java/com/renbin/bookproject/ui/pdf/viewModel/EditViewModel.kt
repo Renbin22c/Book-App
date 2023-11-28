@@ -18,11 +18,13 @@ class EditPdfViewModel@Inject constructor(
     authService: AuthService,
     private val bookRepo: BookRepo
 ): BaseAddEditPdfViewModel(categoryRepo, authService) {
+    // StateFlow to hold the details of the book being edited
     private val _book: MutableStateFlow<Book> = MutableStateFlow(
         Book(title = "", desc = "", category = "")
     )
     val book: StateFlow<Book> = _book
 
+    // Function to fetch the details of the book to be edited
     fun getBook(id:String){
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {
@@ -33,6 +35,7 @@ class EditPdfViewModel@Inject constructor(
         }
     }
 
+    // Function to submit the updated details of the book
     fun submit(title: String, desc: String, category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             safeApiCall {

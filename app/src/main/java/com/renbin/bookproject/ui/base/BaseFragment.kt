@@ -21,6 +21,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Use lifecycleScope to launch coroutine with repeatOnLifecycle
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED){
                 viewModel.onCreate()
@@ -36,8 +37,10 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         setupViewModelObserver()
     }
 
+    // Hook for handling fragment result
     protected open fun onFragmentResult() {}
 
+    // Hook for setting up ViewModel observers
     protected open fun setupViewModelObserver() {
         lifecycleScope.launch {
             viewModel.error.collect {
@@ -52,8 +55,10 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         }
     }
 
+    // Hook for setting up UI components
     protected open fun setupUIComponents() {}
 
+    // Show a snackbar with customizable appearance based on whether it's an error
     private fun showSnackbar(msg: String, isError: Boolean = false) {
         val snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
         if (isError) {
