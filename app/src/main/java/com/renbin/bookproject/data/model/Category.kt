@@ -9,6 +9,7 @@ data class Category(
     val uid: String = "",
     val timestamp: Long = System.currentTimeMillis()
 ){
+    // Converts the Category object to a HashMap for storing in a database
     fun toHashMap(): HashMap<String, Any>{
         return hashMapOf(
             "category" to category,
@@ -17,6 +18,7 @@ data class Category(
         )
     }
 
+    //Creates a Category object from a HashMap retrieved from the database
     companion object{
         fun fromHashMap(hash: Map<String, Any>): Category{
             return Category(

@@ -16,12 +16,24 @@ class AddCategoryViewModel @Inject constructor(
     private val authService: AuthService
 ): BaseViewModel() {
 
+    // Submit a new category for the current user
     fun submit(category: String){
+        // Get the current user
         val user = authService.getCurrentUser()
+
+        // If the user is not null, proceed with submitting the category
         user?.let { currentUser ->
-            val category = Category(category = category)
+            // Create a Category object
+            val categoryObject = Category(category = category)
+
+            // Launch a coroutine in the IO dispatcher to perform the category insertion
             viewModelScope.launch(Dispatchers.IO) {
-                safeApiCall { repo.insert(category, currentUser.uid) }
+                // Use safeApiCall to handle errors
+                safeApiCall {
+                    // Insert the category into the repository, associating it with the current user
+                    repo.insert(categoryObject, currentUser.uid)
+                }
+                // Emit a success message after successful category addition
                 _success.emit("Add Category Successfully!!!")
             }
         }

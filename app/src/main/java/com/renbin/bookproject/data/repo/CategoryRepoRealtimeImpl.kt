@@ -15,6 +15,7 @@ import kotlinx.coroutines.tasks.await
 class CategoryRepoRealtimeImpl(
     private val dbRef: DatabaseReference
 ) : CategoryRepo {
+    // Retrieves all categories associated with a user in real-time using a Flow
     override fun getAllCategories(uid: String) = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -37,15 +38,18 @@ class CategoryRepoRealtimeImpl(
         awaitClose()
     }
 
+    // Inserts a new category associated with a user into the databas
     override suspend fun insert(category: Category, uid: String) {
         val categoryWithUid = category.copy(uid = uid)
         dbRef.push().setValue(categoryWithUid.toHashMap()).await()
     }
 
+    // Deletes a specific category from the database by its ID
     override suspend fun delete(id: String) {
         dbRef.child(id).removeValue()
     }
 
+    // Retrieves all category names associated with a user using a Flow
     override suspend fun getAllCategoryNames(uid: String): Flow<List<String>> {
         return flow {
             val categoryNames = dbRef.orderByChild("uid").equalTo(uid).get().await().children.mapNotNull {

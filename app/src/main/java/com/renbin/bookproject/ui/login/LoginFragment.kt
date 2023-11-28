@@ -30,11 +30,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.setupUIComponents()
 
         binding.run {
+            // Navigate to the register destination when "Sign Up" is clicked
             tvSignUp.setOnClickListener {
                 val action = LoginFragmentDirections.actionGlobalRegister()
                 navController.navigate(action)
             }
 
+            // Trigger the login or password reset process when the "Login" button is clicked
             btnLogin.setOnClickListener {
                 val email = etEmail.text.toString()
                 val pass = etPassword.text.toString()
@@ -45,8 +47,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 }
             }
 
+            // Toggle between login and password reset modes when "Forgot Password" is clicked
             tvForgot.setOnClickListener {
                 if (forgotMode){
+                    // Switching back to login mode
                     tilPassword.visibility = View.VISIBLE
                     tvForgot.text = getString(R.string.forgot_password)
                     tvTitle.text = getString(R.string.please_login)
@@ -57,6 +61,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     forgotMode = false
 
                 } else {
+                    // Switching to password reset mode
                     tilPassword.visibility = View.GONE
                     tvForgot.text = getString(R.string.use_password_to_login)
                     tvTitle.text = getString(R.string.reset_password)
@@ -74,6 +79,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
+            // Observe success events from the ViewModel and navigate to the home destination on login
             viewModel.success.collect {
                 if (!forgotMode) {
                     val action = LoginFragmentDirections.actionLoginToHome()

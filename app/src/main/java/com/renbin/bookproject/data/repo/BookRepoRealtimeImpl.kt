@@ -14,6 +14,7 @@ import kotlinx.coroutines.tasks.await
 class BookRepoRealtimeImpl(
     private val dbRef: DatabaseReference
 ): BookRepo {
+    // Retrieves all books associated with a user in real-time using a Flow
     override fun getAllBooks(uid: String) = callbackFlow{
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -36,6 +37,7 @@ class BookRepoRealtimeImpl(
         awaitClose()
     }
 
+    // Retrieves books of a specific category associated with a user in real-time using a Flow
     override fun getBookByCategory(category: String, uid: String): Flow<List<Book>> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -58,6 +60,7 @@ class BookRepoRealtimeImpl(
         awaitClose()
     }
 
+    // Retrieves favorite books associated with a user in real-time using a Flow
     override fun getBookByFavourite(uid: String): Flow<List<Book>> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -80,11 +83,13 @@ class BookRepoRealtimeImpl(
         awaitClose()
     }
 
+    // Inserts a new book associated with a user into the databas
     override suspend fun insert(book: Book, uid: String) {
         val bookWithUid = book.copy(uid = uid)
         dbRef.push().setValue(bookWithUid.toHashMap()).await()
     }
 
+    // Retrieves a specific book by its ID from the database
     override suspend fun getBook(id: String): Book? {
         val item = dbRef.child(id).get().await()
         return item.key?.let {
@@ -92,11 +97,13 @@ class BookRepoRealtimeImpl(
         }
     }
 
+    // Updates a specific book in the database
     override suspend fun update(id: String, book: Book) {
         if(id.isEmpty()) return
         dbRef.child(id).setValue(book.toHashMap())
     }
 
+    // Deletes a specific book from the database by its ID
     override suspend fun delete(id: String) {
         dbRef.child(id).removeValue()
     }

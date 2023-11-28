@@ -26,10 +26,17 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+    // Initialize the ViewModel using Hilt
     override val viewModel: HomeViewModel by viewModels()
+
+    // Initialize adapters for categories and books
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var bookAdapter: BookAdapter
+
+    // Variable to track the folder state
     private var folder = true
+
+    // Variable to track the folder state
     private lateinit var searchView: SearchView
 
     override fun onCreateView(
@@ -43,16 +50,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setupUIComponents() {
         super.setupUIComponents()
 
+        // Setup adapters for categories and books
         setupCategoryAdapter()
         setupBookAdapter()
+
+        // Setup search functionality
         search()
 
         binding.run {
+            // Set click listener for adding a new category
             btnCategory.setOnClickListener {
                 val dialogFragment = AddCategoryPopUpFragment()
                 dialogFragment.show(childFragmentManager, "AddCategoryPopUpFragment")
             }
 
+            // Set click listener for adding a new PDF
             fabPDF.setOnClickListener {
                 if (categoryAdapter.itemCount > 0) {
                     val action = HomeFragmentDirections.actionHomeToAddPdf()
@@ -62,11 +74,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
             }
 
+            // Set click listener for toggling between folder and book view
             ibFolder.setOnClickListener {
                 folder = !folder
                 viewModel.setFolderState(folder)
             }
 
+            // Set click listener for profile menu
             ibProfile.setOnClickListener {
                 showActionProfileMenu(it)
             }
@@ -78,6 +92,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
+            // Observe categories data changes
             viewModel.categories.collect {
                 categoryAdapter.setCategories(it)
                 if (categoryAdapter.itemCount > 0)
@@ -86,12 +101,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         lifecycleScope.launch {
+            // Observe books data changes
             viewModel.books.collect{
                 bookAdapter.setBooks(it)
             }
         }
 
         lifecycleScope.launch {
+            // Observe folder state changes
             viewModel.folderState.observe(viewLifecycleOwner) { isFolderVisible ->
                 folder = isFolderVisible
                 updateUIBasedOnFolderState()
@@ -99,6 +116,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         lifecycleScope.launch {
+            // Observe loading state changes
             viewModel.loading.collect{
                 if (it){
                     binding.progressBar.visibility = View.VISIBLE
@@ -118,15 +136,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    // Setup adapter for categories
     private fun setupCategoryAdapter(){
         categoryAdapter = CategoryAdapter(emptyList())
         categoryAdapter.listener = object: CategoryAdapter.Listener{
             override fun onClick(category: Category) {
+                // Navigate to the books under the selected category
                 val action = HomeFragmentDirections.actionHomeToBook(category.category)
                 navController.navigate(action)
             }
 
             override fun onDelete(category: Category) {
+                // Delete the selected category
                 viewModel.delete(category)
             }
 
@@ -136,15 +157,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvCategory.layoutManager = layoutManager
     }
 
+    // Setup adapter for books
     private fun setupBookAdapter(){
         bookAdapter = BookAdapter(emptyList())
         bookAdapter.listener = object: BookAdapter.Listener{
             override fun onClick(book: Book) {
+                // Navigate to the details of the selected book
                 val action = HomeFragmentDirections.actionGlobalBookDetails(book.id)
                 navController.navigate(action)
             }
 
             override fun onItemClick(view: View, book: Book) {
+                // Show action menu for the selected book
                 showActionBookMenu(view, book)
             }
         }
@@ -153,6 +177,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.rvBook.layoutManager = layoutManager
     }
 
+    // Update UI based on folder state
     private fun updateUIBasedOnFolderState() {
         if (folder) {
             binding.rvCategory.visibility = View.VISIBLE
@@ -173,6 +198,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    // Show the profile action menu
     private fun showActionProfileMenu(view:View){
         val popupMenu = PopupMenu(requireContext(),view)
         popupMenu.inflate(R.menu.profile_item_action_menu)
@@ -183,16 +209,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.profile ->{
+                    // Navigate to the profile screen
                     val action = HomeFragmentDirections.actionHomeToProfile()
                     navController.navigate(action)
                     true
                 }
                 R.id.recycleBin->{
+                    // Navigate to the recycle bin screen
                     val action = HomeFragmentDirections.actionHomeToRecycleBook()
                     navController.navigate(action)
                     true
                 }
                 else -> {
+                    // Show logout confirmation dialog
                     alertLogout()
                     true
                 }
@@ -200,6 +229,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    // Show the action menu for the selected book
     private fun showActionBookMenu(view:View, book: Book){
         val popupMenu = PopupMenu(requireContext(),view)
         popupMenu.inflate(R.menu.book_item_action_menu)
@@ -209,6 +239,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.deleteBook -> {
+                    // Move the book to the recycle bin and delete it
                     viewModel.addRecycleBook(
                         book.title, book.desc, book.category, book.link,
                         book.url, book.uid, book.timestamp
@@ -218,6 +249,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 }
 
                 else ->{
+                    // Navigate to the edit PDF screen
                     val action = HomeFragmentDirections.actionGlobalEditPdf(book.id)
                     navController.navigate(action)
                     true
@@ -226,11 +258,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    // Setup search functionality
     private fun search(){
         searchView = binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
+                    // Filter books based on the query and set them in the adapter
                     val filteredBooks = viewModel.filterBooksByQuery(query)
                     bookAdapter.setBooks(filteredBooks)
                 }
@@ -240,6 +274,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
+                    // Filter books based on the new text and set them in the adapter
                     val filteredBooks = viewModel.filterBooksByQuery(newText)
                     bookAdapter.setBooks(filteredBooks)
                 } else{
@@ -250,6 +285,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         })
     }
 
+    // Show a confirmation dialog for logout
     private fun alertLogout(){
         val dialogView = layoutInflater.inflate(R.layout.alert_dialog, null)
         val alertDialog = MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialog_Rounded)
@@ -265,6 +301,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         btnConfirm.setOnClickListener {
+            // Logout the user and navigate to the main screen
             viewModel.logout()
             val action = HomeFragmentDirections.actionHomeToMain()
             navController.navigate(action)

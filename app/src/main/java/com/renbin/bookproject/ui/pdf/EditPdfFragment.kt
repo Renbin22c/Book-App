@@ -23,6 +23,7 @@ class EditPdfFragment: BaseAddEditPdfFragment() {
         viewModel.getBook(args.bookId)
 
         binding.btnSubmit.setOnClickListener {
+            // Save the updated book information to Firebase
             saveBookToFirebase()
         }
     }
@@ -30,6 +31,7 @@ class EditPdfFragment: BaseAddEditPdfFragment() {
     override fun setupViewModelObserver() {
         super.setupViewModelObserver()
         lifecycleScope.launch {
+            // Observe the book details and update UI fields
             viewModel.book.collect {
                 binding.etTitle.setText(it.title)
                 binding.etDesc.setText(it.desc)
@@ -38,6 +40,7 @@ class EditPdfFragment: BaseAddEditPdfFragment() {
         }
     }
 
+    // Save the updated book information to Firebase
     private fun saveBookToFirebase(){
         val title = binding.etTitle.text.toString().trim()
         val desc = binding.etDesc.text.toString().trim()

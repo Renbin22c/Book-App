@@ -8,10 +8,12 @@ import kotlinx.coroutines.tasks.await
 class StorageService(
     private val storage: StorageReference = FirebaseStorage.getInstance().reference
 ) {
+    // Adds an image to the storage with the specified name
     suspend fun addImage(name: String, uri: Uri){
         storage.child(name).putFile(uri).await()
     }
 
+    // Retrieves the download URL for the image with the specified name
     suspend fun getImage(name: String): Uri?{
         return try {
             storage.child(name).downloadUrl.await()
@@ -21,6 +23,7 @@ class StorageService(
         }
     }
 
+    // Deletes the PDF file with the specified URL from the storage
     suspend fun deletePdf(url:String){
         storage.child(url).delete().await()
     }

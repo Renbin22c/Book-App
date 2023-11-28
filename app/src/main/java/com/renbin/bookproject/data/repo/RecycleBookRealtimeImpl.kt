@@ -14,6 +14,7 @@ import kotlinx.coroutines.tasks.await
 class RecycleBookRealtimeImpl(
     private val dbRef: DatabaseReference
 ): RecycleBookRepo {
+    // Retrieves all recycled books associated with a user in real-time using a Flow
     override fun getAllRecycleBooks(uid: String) = callbackFlow{
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -36,10 +37,12 @@ class RecycleBookRealtimeImpl(
         awaitClose()
     }
 
+    // Inserts a new recycled book into the database
     override suspend fun insert(recycleBook: RecycleBook) {
         dbRef.push().setValue(recycleBook.toHashMap()).await()
     }
 
+    // Deletes a specific recycled book from the database by its ID
     override suspend fun delete(id: String) {
         dbRef.child(id).removeValue()
     }

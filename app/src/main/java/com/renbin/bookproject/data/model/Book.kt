@@ -14,6 +14,7 @@ data class Book(
     val uid: String = "",
     val timestamp: Long = System.currentTimeMillis()
 ){
+    // Converts the Book object to a HashMap for storing in a database
     fun toHashMap(): HashMap<String, Any>{
         return hashMapOf(
             "title" to title,
@@ -27,6 +28,7 @@ data class Book(
         )
     }
 
+    // Creates a Book object from a HashMap retrieved from the database
     companion object{
         fun fromHashMap(hash: Map<String, Any>): Book{
             return Book(

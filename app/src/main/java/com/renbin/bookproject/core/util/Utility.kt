@@ -17,6 +17,7 @@ import java.util.Calendar
 import java.util.Locale
 
 object Utility {
+    // Displays a custom toast message with an icon
     fun showToast(context: Context, message: String, iconResourceId: Int) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layout = inflater.inflate(R.layout.custom_toast, null)
@@ -35,6 +36,7 @@ object Utility {
     }
 
 
+    // Loads a PDF into a PDFView and updates related UI components
     fun loadPdf(book: Book, pdfView: PDFView, sizeView: TextView, progressBar: ProgressBar, pageView: TextView) {
         pdfView.recycle()
         progressBar.visibility = View.VISIBLE
@@ -70,6 +72,7 @@ object Utility {
         }
     }
 
+    // Loads a recycled PDF into a PDFView and updates related UI components
     fun loadRecycleBookPdf(recycleBook: RecycleBook, pdfView: PDFView, sizeView: TextView, progressBar: ProgressBar, pageView: TextView) {
         pdfView.recycle()
         progressBar.visibility = View.VISIBLE
@@ -105,6 +108,7 @@ object Utility {
         }
     }
 
+    // Formats a timestamp into a human-readable date string
     fun formatTimestamp(timestamp: Long): String {
         val cal = Calendar.getInstance(Locale.ENGLISH)
         cal.timeInMillis = timestamp

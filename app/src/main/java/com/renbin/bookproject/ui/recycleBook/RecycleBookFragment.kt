@@ -48,12 +48,14 @@ class RecycleBookFragment : BaseFragment<FragmentRecycleBookBinding>() {
         super.setupViewModelObserver()
 
         lifecycleScope.launch {
+            // Observe recycle books data changes
             viewModel.recycleBooks.collect{
                 adapter.setRecycleBooks(it)
             }
         }
 
         lifecycleScope.launch {
+            // Observe loading state and update UI accordingly
             viewModel.loading.collect{
                 if (it){
                     binding.progressBar.visibility = View.VISIBLE
@@ -65,11 +67,13 @@ class RecycleBookFragment : BaseFragment<FragmentRecycleBookBinding>() {
         }
     }
 
+    // Setup the adapter for the RecyclerView
     private fun setupAdapter(){
         adapter = RecycleBookAdapter(emptyList())
         adapter.listener = object: RecycleBookAdapter.Listener{
 
             override fun onItemClick(view: View, recycleBook: RecycleBook) {
+                // Show the action menu when a recycle book item is clicked
                 showActionMenu(view, recycleBook)
             }
         }
@@ -78,22 +82,25 @@ class RecycleBookFragment : BaseFragment<FragmentRecycleBookBinding>() {
         binding.rvBook.layoutManager = layoutManager
     }
 
+    // Show the action menu for recycle book items
     private fun showActionMenu(view:View, recycleBook: RecycleBook){
         val popupMenu = PopupMenu(requireContext(),view)
         popupMenu.inflate(R.menu.recycle_book_item_action_menu)
         popupMenu.setForceShowIcon(true)
         popupMenu.show()
 
-
+        // Set click listener for menu items
         popupMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.deleteBook -> {
+                    // Delete the recycle book and its associated storage book
                     viewModel.deleteRecycleBook(recycleBook.id)
                     viewModel.deleteStorageBook(recycleBook.url)
                     true
                 }
 
                 else ->{
+                    // Add the book back and delete it from the recycle bin
                     viewModel.addBackBook(
                         recycleBook.title, recycleBook.desc, recycleBook.category, recycleBook.link,
                         recycleBook.url, recycleBook.uid, recycleBook.timestamp)

@@ -14,6 +14,7 @@ data class RecycleBook(
     val uid: String = "",
     val timestamp: Long = 0
 ){
+    // Converts the Recycle Book object to a HashMap for storing in a database
     fun toHashMap(): HashMap<String, Any>{
         return hashMapOf(
             "title" to title,
@@ -27,6 +28,7 @@ data class RecycleBook(
         )
     }
 
+    // Creates a Recycle Book object from a HashMap retrieved from the database
     companion object{
         fun fromHashMap(hash: Map<String, Any>): Book{
             return Book(
