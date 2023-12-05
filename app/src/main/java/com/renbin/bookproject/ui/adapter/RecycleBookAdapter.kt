@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.renbin.bookproject.core.util.Utility
 import com.renbin.bookproject.core.util.Utility.loadRecycleBookPdf
 import com.renbin.bookproject.data.model.RecycleBook
 import com.renbin.bookproject.databinding.ItemLayoutRecycleBookBinding
@@ -48,7 +49,8 @@ class RecycleBookAdapter(
                 // Set recycled book information in the respective TextViews
                 tvTitle.text = recycleBook.title
                 tvDesc.text = recycleBook.desc
-                tvTime.text = recycleBook.timestamp.toString()
+                val time = Utility.formatTimestamp(recycleBook.timestamp)
+                tvTime.text = time
                 tvCategory.text = recycleBook.category
 
                 // Set up click listener for the "More" button
