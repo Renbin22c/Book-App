@@ -18,4 +18,4 @@ The user profile serves as a hub of information, displaying the account creation
 ## Offline Access
 While the app is optimized for online use, a reliable internet connection is crucial. Users will be prompted to reconnect to the network to ensure uninterrupted access to the application's wealth of features.
 
-Explore the world of literature with our professional-grade book management app – where convenience, organization, and a delightful reading experience converge.
+Explore the world of literature with the professional-grade book management app – where convenience, organization, and a delightful reading experience converge.
